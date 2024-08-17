@@ -4,6 +4,9 @@ use std::env;
 
 fn main() {
     println!("cargo:rerun-if-changed=build.rs");
+    if let Some(true) = version_check::is_min_version("1.71.0") {
+        println!("cargo:rustc-cfg=build_hasher_hash_one");
+    }
     if let Some(true) = version_check::supports_feature("specialize") {
         println!("cargo:rustc-cfg=feature=\"specialize\"");
     }
